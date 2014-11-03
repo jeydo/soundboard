@@ -18,7 +18,7 @@ foreach ($dirs as $dir) {
         }
     }
 }
-$class = ['', 'green', 'blue', 'yellow'];
+$class = ['', 'green', 'blue', 'yellow', 'lightblue'];
 $k = 0;
 ?>
 <html>
@@ -48,7 +48,10 @@ $k = 0;
             </div>
             <?php endforeach; ?>
         </div>
-    <?php $k++; endforeach; ?>
+    <?php
+	$k++;
+	if ($k > count($class)) $k = 0;
+	endforeach; ?>
     </div>
     <script>
         $(function() {

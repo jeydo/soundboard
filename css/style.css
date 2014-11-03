@@ -49,6 +49,14 @@ body {
         a.push.yellow:active {
             box-shadow: 0px 2px 0px #ec971f;
         }
+	a.push.lightblue {
+		background:#5bc0de;
+		border-color:#31b0d5;
+		box-shadow: 0px 9px 0px #31b0d5;
+        }
+        a.push.lightblue:active {
+            box-shadow: 0px 2px 0px #31b0d5;
+        }
         [class^="col-"] {
             margin-top:20px;
         }
