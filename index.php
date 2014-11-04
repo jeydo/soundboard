@@ -1,4 +1,5 @@
 <?php
+require_once 'utils.php';
 $home  = './sounds/';
 $dirs  = new DirectoryIterator($home);
 $files = [];
@@ -13,7 +14,8 @@ foreach ($dirs as $dir) {
             $info               = pathinfo($file->getFilename());
             $files[$filename][] = [
                 'file' => $path . $info['basename'],
-                'name' => $info['filename']
+                'name' => $info['filename'],
+                'slug' => cleanStrRewrite($info['filename'])
             ];
         }
     }
@@ -42,7 +44,11 @@ $k = 0;
         <div class="row">
             <?php endif; ?>
             <div class="col-md-2">
-                <a href="#" class="push <?=$class[$k]?>" data-src="<?=$file['file']?>">
+                <a href="#"
+                    class="push <?=$class[$k]?>"
+                    data-src="<?=$file['file']?>"
+                    id="<?=$file['slug']?>"
+                >
                     <?=$file['name']?>
                 </a>
             </div>
@@ -55,15 +61,27 @@ $k = 0;
     </div>
     <script>
         $(function() {
-            var audio;
+            var audioList = {},
+                current;
             $('a').on('click', function(e) {
+                var $this = $(this),
+                    id    = $this.attr('id');
                 e.preventDefault();
-                if (audio) {
-                    audio.pause();
+                history.pushState(null, null, '#' + id);
+                if (audioList[id] == undefined) {
+                    audioList[id] = new Audio($this.data('src'));
                 }
-                audio = new Audio($(this).data('src'));
-                audio.play();
+                if (current) {
+                    current.pause();
+                    current.currentTime = 0;
+                }
+                current = audioList[id];
+                current.play();
             });
+
+            if (window.location.hash.length) {
+                $(window.location.hash).trigger('click');
+            }
         });
     </script>
 </body>
