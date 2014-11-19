@@ -10,9 +10,7 @@ h1, h2 {
     margin-top:20px;
 }
 
-.btn > .glyphicon:before {
-    line-height: 1.42857;
-}
+
 audio {
     display: none;
 }
