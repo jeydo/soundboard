@@ -78,9 +78,6 @@ $k = 0;
 	endforeach; ?>
     </div>
     <script>
-    function ended() {
-                console.log('schnek');
-            }
         $(function() {
             var current,
                 $playlist = $('.playlist');
@@ -112,8 +109,6 @@ $k = 0;
                 });
             $playlist.on('click', '.remove', function() {
                 $(this).parent('.btn-group').remove();
-            }).on('ended', 'audio', function() {
-                console.log('whut');
             });
             $('.play-playlist').on('click', function() {
                 var $this      = $(this),
